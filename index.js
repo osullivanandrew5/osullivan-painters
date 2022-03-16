@@ -68,7 +68,7 @@ $(document).ready(function(){
 
 function myStart() {
 	// Change first main image
-	$("#rightImage").css("background", "linear-gradient(0deg, rgba(44, 98, 255, 0) 60%, rgba(44, 98, 255, 0.8) 80%), url('./media/pics/img_20211208_150545-1.jpg')");
+	$("#rightImage").css("background", "linear-gradient(0deg, rgba(44, 98, 255, 0) 60%, rgba(44, 98, 255, 0.8) 80%), url('./media/pics/2021/12/img_20211208_150545-1.jpg')");
 	$("#rightImage").css("background-size", "cover");
 	$("#rightImage").css("background-repeat", "no-repeat");
 
