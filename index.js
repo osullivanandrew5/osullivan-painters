@@ -45,14 +45,6 @@ function closemagnify(){
 	},800);
 }
 
-setTimeout(function(){
-	$("#loading").addClass("animated fadeOut");
-	setTimeout(function(){
-	  $("#loading").removeClass("animated fadeOut");
-	  $("#loading").css("display","none");
-	},800);
-},1650);
-
 $(document).ready(function(){
 	$("a").on('click', function(event) {
 		if (this.hash !== "") {
@@ -76,6 +68,8 @@ function myStart() {
 	let branchName = "master";
 	let fullURL = `https://api.github.com/repos/${userName}/${repoName}/git/trees/${branchName}?recursive=1`;
 
+	// Set the global configs to synchronous 
+	$.ajaxSetup({ async: false });
 	$.getJSON(fullURL, function(dataIn) {
 
 		// Extract all paths
@@ -83,9 +77,7 @@ function myStart() {
 
 		// Extract only images
 		let listImagesAll = listAllFiles.filter((inStr) => inStr.startsWith("media/pics/"));
-		let listImages = listImagesAll.filter(function (each) {
-			return (each.indexOf('.') > -1);
-		});
+		let listImages = listImagesAll.filter((eachIn) => (eachIn.includes(".")));
 
 		// Chose single random image
 		let now = (new Date()).getTime();
@@ -104,5 +96,18 @@ function myStart() {
 
 	});
 
+	// Set load functions
+	function loaded() {
+		setTimeout(function(){
+			$("#loading").addClass("animated fadeOut");
+			setTimeout(function(){
+			$("#loading").removeClass("animated fadeOut");
+			$("#loading").css("display","none");
+			},800);
+		},1650);
+	}
+
+	// Remove spinner when loaded
+	$(window).on("load", loaded);
 
 }
